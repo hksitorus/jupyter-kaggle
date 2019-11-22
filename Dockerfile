@@ -36,6 +36,13 @@ RUN pip install psycopg2 cx_Oracle PyMySQL
 
 RUN npm install -g --unsafe-perm ijavascript && ijsinstall --install=global
 
-RUN pip install jupyterlab && jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install qgrid --no-build
+RUN jupyter labextension install arcgis-map-ipywidget@1.5.0 --no-build
+RUN conda install --quiet --yes -c bokeh jupyter_bokeh && jupyter labextension install @bokeh/jupyter_bokeh --no-build
+RUN jupyter labextension install @mflevine/jupyterlab_html --no-build
+RUN pip install jupyterlab_latex && jupyter labextension install @jupyterlab/latex --no-build
+RUN conda install --quiet --yes -c pyviz holoviews bokeh && jupyter labextension install @pyviz/jupyterlab_pyviz --no-build
+
+RUN jupyter lab build
 
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
