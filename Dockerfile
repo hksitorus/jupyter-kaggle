@@ -28,4 +28,14 @@ RUN jupyter lab build
 
 RUN useradd -m hksitorus && useradd -m arifsolomon && useradd -m fchrulk
 
+RUN conda install --quiet --yes basemap pyproj proj4
+RUN wget https://raw.githubusercontent.com/matplotlib/basemap/master/lib/mpl_toolkits/basemap/data/epsg -O /opt/conda/share/proj/epsg
+ENV PROJ_LIB=/opt/conda/share/proj/
+
+RUN pip install psycopg2 cx_Oracle PyMySQL
+
+RUN npm install -g --unsafe-perm ijavascript && ijsinstall --install=global
+
+RUN pip install jupyterlab && jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
