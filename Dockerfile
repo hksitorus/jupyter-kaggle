@@ -43,10 +43,7 @@ RUN conda install --quiet --yes -c pyviz holoviews bokeh && jupyter labextension
 RUN conda install --quiet --yes -c conda-forge ipyleaflet && jupyter labextension install jupyter-leaflet --no-build
 RUN conda install --quiet --yes -c conda-forge ipysheet && jupyter labextension install ipysheet --no-build
 
-#RUN conda install --quiet --yes -c esri arcgis=1.7.0 && jupyter labextension install arcgis-map-ipywidget@@1.7.0 --no-build
-
 
 RUN jupyter lab build
-RUN rm -rf /tmp/qgrid
 
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
