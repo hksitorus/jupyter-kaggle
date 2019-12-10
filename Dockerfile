@@ -75,4 +75,10 @@ ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
 ENV MESOS_NATIVE_LIBRARY /usr/local/lib/libmesos.so
 ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
 
+RUN apt-get -y update && \
+    apt-get install --no-install-recommends -y openjdk-8-jre-headless ca-certificates-java && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
