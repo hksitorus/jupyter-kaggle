@@ -46,4 +46,7 @@ RUN conda install --quiet --yes -c conda-forge ipysheet && jupyter labextension 
 
 RUN jupyter lab build
 
+RUN pip install intel-tensorflow
+RUN pip install pyspark
+
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
