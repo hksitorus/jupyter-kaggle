@@ -79,4 +79,9 @@ ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
 ENV MESOS_NATIVE_LIBRARY /usr/local/lib/libmesos.so
 ENV SPARK_OPTS --driver-java-options=-Xms4096M --driver-java-options=-Xmx32768M --driver-java-options=-Dlog4j.logLevel=info
 
+RUN pip install fastparquet
+
+RUN jupyter labextension install @aquirdturtle/collapsible_headings --no-build
+RUN jupyter lab build
+
 CMD ["jupyterhub", "-f", "jupyterhub_config.py"]
